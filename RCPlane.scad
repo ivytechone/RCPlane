@@ -1,7 +1,7 @@
 $fn = 64;
 
 segmentLength = 20;
-thickness = 2;
+thickness = 2.5;
 
 renderSegment = -1;
 
@@ -24,7 +24,7 @@ else
 module plane()
 {    
     // body is diameter for each segment
-    planeBody([40, 40, 38, 36, 28, 20]);
+    planeBody([52, 52, 50, 45, 38, 25]);
 }
 
 //---------------------------------------------------
@@ -66,8 +66,33 @@ module fuselageSegment(radius, nextRadius)
 
 module fuselageFirewall(radius)
 {
-    linear_extrude(2)
-    circle(radius);
+    screwRadius=1;
+    centerHoldRadius=2;
+    
+    difference()
+    {
+    cylinder(h=1, r1=radius, r2=radius);
+    
+    
+    cylinder(h=10, r1=centerHoldRadius, r2=centerHoldRadius, center=true);
+        
+        
+    translate([8,0,0])
+    cylinder(h=10, r1=screwRadius, r2=screwRadius, center=true);
+        
+    rotate([0, 0, 90])
+    translate([8,0,0])
+    cylinder(h=10, r1=screwRadius, r2=screwRadius, center=true);
+        
+    rotate([0, 0, 180])
+    translate([8,0,0])
+    cylinder(h=10, r1=screwRadius, r2=screwRadius, center=true);
+        
+    rotate([0, 0, 270])
+    translate([8 ,0,0])
+    cylinder(h=10, r1=screwRadius, r2=screwRadius, center=true);
+   
+    }
 }
 
 module fuselageSegmentBeams(radius, nextRadius)
